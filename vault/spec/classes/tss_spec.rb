@@ -8,6 +8,10 @@ describe 'vault::tss' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+
+      it do
+        is_expected.to contain_file('/tmp/jptest2')
+      end
     end
   end
 end

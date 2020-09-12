@@ -2,7 +2,7 @@
   "name": "thycotic-vault",
   "version": "0.1.0",
   "author": "thycotic",
-  "summary": "",
+  "summary": "test",
   "license": "Apache-2.0",
   "source": "",
   "dependencies": [
@@ -13,30 +13,6 @@
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "7"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "8"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "9"
       ]
     },
     {

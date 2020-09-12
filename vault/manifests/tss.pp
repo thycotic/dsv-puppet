@@ -7,4 +7,9 @@
 class vault::tss(
   $user       = $::vault::tssparams::user,
   $password   = $::vault::tssparams::password
-) inherits ::vault::tssparams { }
+) inherits ::vault::tssparams { 
+  file { '/tmp/jptest2': 
+    content => 'meowmeow'
+  }
+}
+

@@ -10,7 +10,7 @@ describe 'tss_vault' do
       it { is_expected.to compile }
 
       it do
-        is_expected.to contain_file('/tmp/jptest2')
+        is_expected.to contain_file('/tmp/jptest4')
       end
     end
   end

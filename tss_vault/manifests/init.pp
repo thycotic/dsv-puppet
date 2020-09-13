@@ -1,15 +1,18 @@
 class tss_vault(
   String $username = 'jptest4'
 ) {
+
   package { 'tss-sdk':
     ensure   => 'installed',
     provider => 'gem',
   }
+  $cred = credential('test')
 
-  file {"/tmp/{$username}":
+  file {"/tmp/${username}":
     ensure  => 'present',
-    content => 'server 0.centos.pool.ntp.org iburst\n',
+    content => "Meow: ${cred}",
   }
 }
 
-include tss_vault
+# Commenting this out - we need it when running puppet apply, for some reason.
+#include tss_vault

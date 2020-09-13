@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'vault::tss' do
+describe 'tss_vault' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }

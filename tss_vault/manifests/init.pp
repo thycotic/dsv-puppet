@@ -1,3 +1,22 @@
+# 
+#
+# Integrates with Thycotic's TSS Server
+#
+# @param username
+#    Specifies username for TSS Server
+#
+# @param password
+#    Specifies password for TSS Server
+#
+# @param tenant
+#   Specifies the TSS server tenant
+#
+# @param cred_id
+#   Specifies the credential ID to be retrieved
+#
+# @param storage_name
+#   Specifies the filename where the file will be installed (inside /tmp)
+#
 class tss_vault(
   String $username = 'sdk_test_app',
   String $password = 'password',
@@ -15,7 +34,7 @@ class tss_vault(
 
   file {"/tmp/${storage_name}":
     ensure  => 'present',
-    content => "${cred}",
+    content => $cred,
   }
 }
 

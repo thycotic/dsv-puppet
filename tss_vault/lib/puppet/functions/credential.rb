@@ -2,21 +2,20 @@ require 'tss'
 
 Puppet::Functions.create_function(:credential) do
   def credential(username, password, tenant, cred_id)
-
-    server = Tss::Server.new({
+    config = {
       username: username.to_s,
       password: password,
-      tenant: tenant
-    })
-    
+      tenant: tenant,
+    }
+    server = Tss::Server.new(config)
+
     begin
-        secret = Tss::Secret.fetch(server, cred_id)
+      secret = Tss::Secret.fetch(server, cred_id)
     rescue AccessDeniedException
-        puts "Whoops, looks like we're unauthorized"
-    rescue  Exception => e
-        puts "Something went wrong: #{e.to_s}"
+      puts "Whoops, looks like we're unauthorized"
+      return nil
     end
 
-    return secret
+    secret
   end
 end

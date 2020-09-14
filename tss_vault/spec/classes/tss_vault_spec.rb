@@ -10,7 +10,7 @@ describe 'tss_vault' do
       it { is_expected.to compile }
 
       it do
-        is_expected.to contain_file('/tmp/jptest4').with_content('Meow: TEST')
+        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
       end
     end
   end

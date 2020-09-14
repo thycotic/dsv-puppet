@@ -9,6 +9,12 @@ describe 'tss_vault' do
 
       it { is_expected.to compile }
 
+      let(:facts) { { use_tss: false } }
+      it do
+        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
+      end
+
+      let(:facts) { { use_tss: true } }
       it do
         is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
       end

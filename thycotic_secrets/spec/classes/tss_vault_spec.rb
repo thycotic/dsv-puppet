@@ -9,14 +9,20 @@ describe 'thycotic_secret' do
 
       it { is_expected.to compile }
 
-      let(:params) { { mode: 'dsv' } }
-      it do
-        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
+      context 'for DSV' do
+        let(:params) { { mode: 'dsv' } }
+
+        it do
+          is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
+        end
       end
 
-      let(:params) { { mode: 'tss' } }
-      it do
-        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
+      context 'for TSS' do
+        let(:params) { { mode: 'tss' } }
+
+        it do
+          is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
+        end
       end
     end
   end

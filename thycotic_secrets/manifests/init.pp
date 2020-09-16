@@ -8,6 +8,9 @@
 # @param tss_config
 #    Specifies several configuration options for TSS
 #
+# @param metadata
+#    Boolean value to determine if we want to returnt the metadata for a secret
+#
 # @param mode
 #    Determines whether we're accessing secrets for DSV or TSS
 #
@@ -15,6 +18,7 @@
 #   Specifies the filename where the file will be installed (inside /tmp)
 class thycotic_secret(
   Enum['dsv', 'tss'] $mode = 'dsv',
+  Boolean $metadata = false,
 
   Hash $dsv_config = {
     'client_id' => 'test',
@@ -43,9 +47,9 @@ class thycotic_secret(
   }
 
   if $mode == 'tss' {
-    $secret = tss_secret($tss_config[username], $tss_config[password], $tss_config[tenant], $tss_config[secret_id])
+    $secret = tss_secret($tss_config[username], $tss_config[password], $tss_config[tenant], $tss_config[secret_id], $metadata)
   } else {
-    $secret = dsv_secret($dsv_config[client_id], $dsv_config[client_secret], $dsv_config[tenant], $dsv_config[secret_path])
+    $secret = dsv_secret($dsv_config[client_id], $dsv_config[client_secret], $dsv_config[tenant], $dsv_config[secret_path], $metadata)
   }
 
   file {"/tmp/${storage_name}":

@@ -1,40 +1,35 @@
 # 
 #
-# Integrates with Thycotic's TSS Server
+# Integrates with Thycotic Secrets
 #
-# @param username
-#    Specifies username for TSS Server
+# @param dsv_config
+#    Specifies several configuration options for DSV
 #
-# @param password
-#    Specifies password for TSS Server
+# @param tss_config
+#    Specifies several configuration options for TSS
 #
-# @param tenant
-#   Specifies the DSV/TSS server tenant
-#
-# @param secret_id
-#   Specifies the TSS secret ID to be retrieved
+# @param mode
+#    Determines whether we're accessing secrets for DSV or TSS
 #
 # @param storage_name
 #   Specifies the filename where the file will be installed (inside /tmp)
-#
-# @param client_id
-#   Specifies the DSV Client ID
-#
-# @param client_secret
-#   Specifies the DSV Client Secret
-#
-# @param secret_path
-#   Specifies the path to the secret for DSV
-#
 class thycotic_secret(
-  String $username = 'sdk_test_app',
-  String $password = 'test_password',
-  String $tenant =  'tmg',
-  Integer $secret_id = 1,
+  Enum['dsv', 'tss'] $mode = 'dsv',
+
+  Hash $dsv_config = {
+    'client_id' => 'test',
+    'client_secret' => 'test_secret',
+    'tenant' => 'tmg',
+    'secret_path' => '/test/secret'
+  },
+
+  Hash $tss_config = {
+    'username' => 'sdk_test_app',
+    'password' => 'test_password',
+    'tenant' => 'tmg',
+    'secret_id' => '1'
+  },
   String $storage_name = 'test-secret.txt',
-  String $client_id = 'test_client_id',
-  String $client_secret = 'test_client_secret',
-  String $secret_path = '/test/secret'
 ) {
 
   package { 'tss-sdk':
@@ -47,10 +42,10 @@ class thycotic_secret(
     provider => 'gem',
   }
 
-  if $facts['use_tss'] {
-    $secret = tss_secret($username, $password, $tenant, $secret_id)
+  if $mode == 'tss' {
+    $secret = tss_secret($tss_config[username], $tss_config[password], $tss_config[tenant], $tss_config[secret_id])
   } else {
-    $secret = dsv_secret($client_id, $client_secret, $tenant, $secret_path)
+    $secret = dsv_secret($dsv_config[client_id], $dsv_config[client_secret], $dsv_config[tenant], $dsv_config[secret_path])
   }
 
   file {"/tmp/${storage_name}":
@@ -58,6 +53,3 @@ class thycotic_secret(
     content => $secret,
   }
 }
-
-# Commenting this out - we need it when running puppet apply, for some reason.
-#include thycotic_secret

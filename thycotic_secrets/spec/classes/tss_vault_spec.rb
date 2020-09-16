@@ -9,12 +9,12 @@ describe 'thycotic_secret' do
 
       it { is_expected.to compile }
 
-      let(:facts) { { use_tss: false } }
+      let(:params) { { mode: 'dsv' } }
       it do
         is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
       end
 
-      let(:facts) { { use_tss: true } }
+      let(:params) { { mode: 'tss' } }
       it do
         is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
       end

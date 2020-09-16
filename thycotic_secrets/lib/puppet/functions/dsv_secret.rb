@@ -11,7 +11,7 @@ Puppet::Functions.create_function(:dsv_secret) do
     vault = Dsv::Vault.new(config)
 
     begin
-      secret = Dsv::Secret.fetch(vault, secret_path).["data"].to_s
+      secret = Dsv::Secret.fetch(vault, secret_path).to_s
     rescue AccessDeniedException
       puts "DSV: Unable to access secret"
       return nil

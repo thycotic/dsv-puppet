@@ -12,7 +12,7 @@
 #   Specifies the DSV/TSS server tenant
 #
 # @param secret_id
-#   Specifies the TSS credential ID to be retrieved
+#   Specifies the TSS secret ID to be retrieved
 #
 # @param storage_name
 #   Specifies the filename where the file will be installed (inside /tmp)
@@ -48,14 +48,14 @@ class thycotic_secret(
   }
 
   if $facts['use_tss'] {
-    $cred = tss_secret($username, $password, $tenant, $secret_id)
+    $secret = tss_secret($username, $password, $tenant, $secret_id)
   } else {
-    $cred = dsv_secret($client_id, $client_secret, $tenant, $secret_path)
+    $secret = dsv_secret($client_id, $client_secret, $tenant, $secret_path)
   }
 
   file {"/tmp/${storage_name}":
     ensure  => 'present',
-    content => $cred,
+    content => $secret,
   }
 }
 

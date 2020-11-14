@@ -21,17 +21,18 @@ class thycotic_secrets(
   Boolean $metadata = false,
 
   Hash $dsv_config = {
-    'client_id' => 'test',
-    'client_secret' => 'test_secret',
+    'client_id' => 'aff24976-7832-40d7-8e3e-df893f38e18a',
+    'client_secret' => 'unVqEpfuk315qNiXAKI-s1mHCA0qcHcDY4py8Y9ZvC4',
     'tenant' => 'tmg',
-    'secret_path' => '/test/secret'
+    'secret_path' => '/test/sdk/nested'
   },
+
 
   Hash $tss_config = {
     'username' => 'sdk_test_app',
-    'password' => 'test_password',
+    'password' => 'm3x8r6tA2nQR',
     'tenant' => 'tmg',
-    'secret_id' => '1'
+    'secret_id' => '1',
   },
   String $storage_name = 'test-secret.txt',
 ) {

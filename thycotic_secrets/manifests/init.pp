@@ -16,7 +16,7 @@
 #
 # @param storage_name
 #   Specifies the filename where the file will be installed (inside /tmp)
-class thycotic_secret(
+class thycotic_secrets(
   Enum['dsv', 'tss'] $mode = 'dsv',
   Boolean $metadata = false,
 

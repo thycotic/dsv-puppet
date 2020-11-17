@@ -9,7 +9,7 @@
 #    Specifies several configuration options for TSS
 #
 # @param metadata
-#    Boolean value to determine if we want to returnt the metadata for a secret
+#    Boolean value to determine if we want to return the metadata for a secret
 #
 # @param mode
 #    Determines whether we're accessing secrets for DSV or TSS
@@ -26,7 +26,6 @@ class thycotic_secrets(
     'tenant' => 'tmg',
     'secret_path' => '/test/sdk/nested'
   },
-
 
   Hash $tss_config = {
     'username' => 'sdk_test_app',

@@ -39,12 +39,12 @@ class thycotic_secrets(
 
   package { 'tss-sdk':
     ensure   => 'installed',
-    provider => 'gem',
+    provider => 'puppet_gem',
   }
 
   package { 'dsv-sdk':
     ensure   => 'installed',
-    provider => 'gem',
+    provider => 'puppet_gem',
   }
 
   if $mode == 'tss' {

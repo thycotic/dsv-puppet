@@ -20,12 +20,12 @@ class thycotic_secrets(
   Enum['dsv', 'tss'] $mode = 'dsv',
   Boolean $metadata = false,
 
-  Hash $dsv_config = {
-    'client_id' => 'aff24976-7832-40d7-8e3e-df893f38e18a',
-    'client_secret' => 'unVqEpfuk315qNiXAKI-s1mHCA0qcHcDY4py8Y9ZvC4',
-    'tenant' => 'tmg',
-    'secret_path' => '/test/sdk/nested'
-  },
+  # Hash $dsv_config = {
+  #   'client_id' => 'aff24976-7832-40d7-8e3e-df893f38e18a',
+  #   'client_secret' => 'unVqEpfuk315qNiXAKI-s1mHCA0qcHcDY4py8Y9ZvC4',
+  #   'tenant' => 'tmg',
+  #   'secret_path' => '/test/sdk/nested'
+  # },
 
   Hash $tss_config = {
     'username' => 'sdk_test_app',
@@ -41,10 +41,10 @@ class thycotic_secrets(
     provider => 'puppet_gem',
   }
 
-  package { 'dsv-sdk':
-    ensure   => 'installed',
-    provider => 'puppet_gem',
-  }
+  # package { 'dsv-sdk':
+  #   ensure   => 'installed',
+  #   provider => 'puppet_gem',
+  # }
 
   if $mode == 'tss' {
     $secret = tss_secret($tss_config[username], $tss_config[password], $tss_config[tenant], $tss_config[secret_id], $metadata)

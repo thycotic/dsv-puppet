@@ -1,3 +1,18 @@
+# 
+# Thycotic Secrets Server
+#
+# Fetches a secret from the secret server, using the crendials provided
+# 
+# @param username
+#    The username for authentication
+# @param password
+#    The password for authentication 
+# @param tenant
+#    The tenant of the server you are requesting access to
+# @param secret_id
+#    The id of the required secret
+#
+
 class thycotic_secrets::tss(
   String $username,
   String $password,

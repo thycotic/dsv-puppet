@@ -1,7 +1,4 @@
-# frozen_string_literal: true
-
 require 'spec_helper'
-
 
 on_supported_os.each do |os, os_facts|
   describe 'thycotic_secrets::dsv' do
@@ -10,11 +7,11 @@ on_supported_os.each do |os, os_facts|
       let(:facts) { os_facts }
       let(:pre_condition) { 'include thycotic_secrets' }
       
-      let(:params) { { 
-        client_id: 'aff24976-7832-40d7-8e3e-df893f38e18a',
-        client_secret: 'unVqEpfuk315qNiXAKI-s1mHCA0qcHcDY4py8Y9ZvC4',
-        tenant: 'tmg',
-        secret_path: '/test/sdk/nested'
+      let(:params) { {
+        client_id: ENV["CLIENT_ID"],
+        client_secret: ENV["CLIENT_SECRET"],
+        tenant: ENV["TENANT"],
+        secret_path: ENV["SECRET_PATH"]
       } }
 
       it { is_expected.to compile }
@@ -22,7 +19,6 @@ on_supported_os.each do |os, os_facts|
       it do
         is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
       end
-
     end
   end
 
@@ -32,11 +28,11 @@ on_supported_os.each do |os, os_facts|
       let(:facts) { os_facts }
       let(:pre_condition) { 'include thycotic_secrets' }
       
-      let(:params) { { 
-        username: 'sdk_test_app',
-        password: 'm3x8r6tA2nQR',
-        tenant: 'tmg',
-        secret_id: '1',
+      let(:params) { {
+        username: ENV["USERNAME"],
+        password: ENV["PASSWORD"],
+        tenant: ENV["TENANT"],
+        secret_id: ENV["SECRET_ID"],
       } }
 
       it { is_expected.to compile }
@@ -46,5 +42,4 @@ on_supported_os.each do |os, os_facts|
       end
     end
   end
-  
 end

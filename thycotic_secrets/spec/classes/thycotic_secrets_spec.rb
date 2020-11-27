@@ -31,7 +31,7 @@ on_supported_os.each do |os, os_facts|
       let(:params) { {
         username: ENV["USERNAME"],
         password: ENV["PASSWORD"],
-        tenant: ENV["TENANT"],
+        server_url: ENV["SERVER_URL"],
         secret_id: ENV["SECRET_ID"],
       } }
 

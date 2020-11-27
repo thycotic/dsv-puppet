@@ -1,12 +1,14 @@
 require 'tss'
 
 Puppet::Functions.create_function(:tss_secret) do
-  def tss_secret(username, password, tenant, secret_id, metadata)
+  def tss_secret(username, password, server_url, secret_id, metadata)
+    
     config = {
       username: username,
       password: password,
-      tenant: tenant,
+      server_url: server_url,
     }
+
     server = Tss::Server.new(config)
 
     begin

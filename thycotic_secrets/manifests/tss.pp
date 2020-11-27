@@ -16,7 +16,7 @@
 class thycotic_secrets::tss(
   String $username,
   String $password,
-  String $tenant,
+  String $server_url,
   String $secret_id,
 ){
   package { 'tss-sdk':
@@ -24,7 +24,7 @@ class thycotic_secrets::tss(
     provider => 'puppet_gem',
   }
 
-  $secret = tss_secret($username, $password, $tenant, $secret_id, $thycotic_secrets::metadata)
+  $secret = tss_secret($username, $password, $server_url, $secret_id, $thycotic_secrets::metadata)
 
   file {"/tmp/${thycotic_secrets::storage_name}":
     ensure  => 'present',

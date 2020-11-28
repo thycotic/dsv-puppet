@@ -3,10 +3,13 @@
 #
 # @param client_id
 #    The client id used for authentication
+#
 # @param client_secret
 #    The client secret used for authentication
+#
 # @param tenant
 #    The tenant of the vault you are requesting access to
+#
 # @param secret_path
 #    the path of the required secret
 #
@@ -29,7 +32,3 @@ class thycotic_secrets::dsv(
     content => $secret,
   }
 }
-
-
-
-

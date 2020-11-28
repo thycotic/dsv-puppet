@@ -5,10 +5,13 @@
 # 
 # @param username
 #    The username for authentication
+#
 # @param password
 #    The password for authentication 
+#
 # @param tenant
 #    The tenant of the server you are requesting access to
+#
 # @param secret_id
 #    The id of the required secret
 #

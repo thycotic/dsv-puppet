@@ -1,117 +1,97 @@
-# vault
-
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
-
-The README template below provides a starting point with details about what
-information to include in your README.
+# Thycotic Secrets
 
 ## Table of Contents
 
-1. [Description](#description)
-1. [Setup - The basics of getting started with vault](#setup)
-    * [What vault affects](#what-vault-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with vault](#beginning-with-vault)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+- [Thycotic Secrets](#thycotic-secrets)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Setup](#setup)
+    - [Requirements](#requirements)
+    - [Installation](#installation)
+  - [Usage](#usage)
+    - [DSV configuration](#dsv-configuration)
+    - [TSS Configuration](#tss-configuration)
+  - [Limitations](#limitations)
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
-
-This should be a fairly short description helps the user decide if your module
-is what they want.
+This Puppet module facilitates the consumption of secrets from Thycotic Secret Server(TSS) and DevOps Secret Vault(DSV). 
 
 ## Setup
 
-### What vault affects **OPTIONAL**
+### Requirements
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+In order to use either Secret Server or DevOps Secret Vault, you must first ensure that the corresponding Ruby SDK is available via the puppetserver gem installer.
 
-If there's more that they should know about, though, this is the place to
-mention:
+```
+# Install DevOps Secret Vault SDK
+puppetserver gem install dsv-sdk
 
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+# Install Secret Server SDK
+puppetserver gem install tss-sdk
+```
 
-### Setup Requirements **OPTIONAL**
+You must also be using a supported OS. See [limitations](#limitations) for a list of supported operating sytems.
 
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
+### Installation
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with vault
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
+This module can be cloned directly into your `modules/` folder for your environment. You can validate this by running `puppet module list` to ensure Puppet recognizes it as a valid module.
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
+There are three classes that can be instantiated in your `manifest` file. Instantiate the appropiate class (or both) depending on which of the Thycotic services you depend on (DSV/TSS).
 
-## Reference
+- `class { 'thycotic_secrets': }` (_not required_)
+- `class { 'thycotic_secrets::dsv': }`
+- `class { 'thycotic_secrets::tss': }`
 
-This section is deprecated. Instead, add reference information to your code as
-Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your
-module. For details on how to add code comments and generate documentation with
-Strings, see the [Puppet Strings documentation][2] and [style guide][3].
+The `thycotic_secrets` base class is _**optional**_ in all cases. If you would like to return the secrets matadata in addition to the secret itself, thwn you can set the `thycotic_secrets::metadata` property to `true`. The default is `false`.
 
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the
-root of your module directory and list out each of your module's classes,
-defined types, facts, functions, Puppet tasks, task plans, and resource types
-and providers, along with the parameters for each.
+> It is **recommended** that you use **Hiera** for configuration.
 
-For each element (class, defined type, function, and so on), list:
+### DSV configuration 
 
-* The data type, if applicable.
-* A description of what the element does.
-* Valid values, if the data type doesn't make it obvious.
-* Default value, if any.
+`thycotic_secrets::dsv` requires the following properties to be set:
 
-For example:
+- `client_id` -- The client's identifier for authentication
+- `client_secret` -- The client's secret for authentication
+- `tenant` -- The server Tenant
+- `secret_path` -- The path to the required secret.
+
+An example:
 
 ```
-### `pet::cat`
+# Example config in common.yaml
 
-#### Parameters
+thycotic_secrets::dsv::client_id: hasdfaw-asefasf-asefs-asefa-asf
+thycotic_secrets::dsv::client_secret: supersecretpassword
+thycotic_secrets::dsv::tenant: abc
+thycotic_secrets::dsv::secret_path: /test/path
+```
 
-##### `meow`
+### TSS Configuration
 
-Enables vocalization in your cat. Valid options: 'string'.
+`thycotic_secrets::tss` requires the following properties to be set:
 
-Default: 'medium-loud'.
+- `username` -- The client's username for authentication
+- `password` -- The client's password for authentication
+- `server_url` -- The full qualified server URL
+- `secret_id` -- The id of the required secret.
+
+An example:
+
+```
+# Example config in common.yaml
+
+thycotic_secrets::tss::username: definitelynotroot
+thycotic_secrets::tss::password: notrooteither
+thycotic_secrets::tss::server_url: https://mysecretserver.org
+thycotic_secrets::tss::secret_id: 1
 ```
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other
-warnings.
+This module _currently_ supports the following operating systems:
 
-## Development
-
-In the Development section, tell other users the ground rules for contributing
-to your project and how they should submit their work.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel are
-necessary or important to include here. Please use the `##` header.
-
-[1]: https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-[2]: https://puppet.com/docs/puppet/latest/puppet_strings.html
-[3]: https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+- Ubuntu 18.04
+- CentOS 7

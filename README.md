@@ -31,7 +31,7 @@ puppetserver gem install dsv-sdk
 puppetserver gem install tss-sdk
 ```
 
-You must also be using a supported OS. See [limitations](#limitations) for a list of supported operating sytems.
+You must also use a supported OS. See [limitations](#limitations) for a list of supported operating systems.
 
 ### Installation
 
@@ -39,13 +39,13 @@ This module can be cloned directly into your `modules/` folder for your environm
 
 ## Usage
 
-There are three classes that can be instantiated in your `manifest` file. Instantiate the appropiate class (or both) depending on which of the Thycotic services you depend on (DSV/TSS).
+There are three classes that can be instantiated in your `manifest` file. Instantiate the appropriate class (or both) depending on which of the Thycotic services you depend on (DSV/TSS).
 
 - `class { 'thycotic_secrets': }` (_not required_)
 - `class { 'thycotic_secrets::dsv': }`
 - `class { 'thycotic_secrets::tss': }`
 
-The `thycotic_secrets` base class is _**optional**_ in all cases. If you would like to return the secrets matadata in addition to the secret itself, thwn you can set the `thycotic_secrets::metadata` property to `true`. The default is `false`.
+The `thycotic_secrets` base class is _**optional**_ in all cases. If you would like to return the secrets metadata in addition to the secret itself, you can set the `thycotic_secrets::metadata` property to `true`. The default is `false`.
 
 > It is **recommended** that you use **Hiera** for configuration.
 
@@ -53,10 +53,10 @@ The `thycotic_secrets` base class is _**optional**_ in all cases. If you would l
 
 `thycotic_secrets::dsv` requires the following properties to be set:
 
-- `client_id` -- The client's identifier for authentication
-- `client_secret` -- The client's secret for authentication
-- `tenant` -- The server Tenant
-- `secret_path` -- The path to the required secret.
+- `client_id` — The client's identifier for authentication
+- `client_secret` — The client's secret for authentication
+- `tenant` — The server Tenant
+- `secret_path` — The path to the required secret.
 
 An example:
 
@@ -73,10 +73,10 @@ thycotic_secrets::dsv::secret_path: /test/path
 
 `thycotic_secrets::tss` requires the following properties to be set:
 
-- `username` -- The client's username for authentication
-- `password` -- The client's password for authentication
-- `server_url` -- The full qualified server URL
-- `secret_id` -- The id of the required secret.
+- `username` — The client's username for authentication
+- `password` — The client's password for authentication
+- `server_url` — The full qualified server URL
+- `secret_id` — The id of the required secret.
 
 An example:
 

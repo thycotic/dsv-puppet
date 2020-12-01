@@ -29,8 +29,8 @@ class thycotic_secrets::tss(
 
   $secret = tss_secret($username, $password, $server_url, $secret_id, $thycotic_secrets::metadata)
 
-  file {"/tmp/${thycotic_secrets::storage_name}":
-    ensure  => 'present',
-    content => $secret,
-  }
+  # file {"/tmp/${thycotic_secrets::storage_name}":
+  #   ensure  => 'present',
+  #   content => $secret,
+  # }
 }

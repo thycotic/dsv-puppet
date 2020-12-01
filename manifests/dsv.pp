@@ -27,8 +27,8 @@ class thycotic_secrets::dsv(
 
   $secret = dsv_secret($client_id, $client_secret, $tenant, $secret_path, $thycotic_secrets::metadata)
 
-  file {"/tmp/${thycotic_secrets::storage_name}":
-    ensure  => 'present',
-    content => $secret,
-  }
+  # file {"/tmp/${thycotic_secrets::storage_name}":
+  #   ensure  => 'present',
+  #   content => $secret,
+  # }
 }

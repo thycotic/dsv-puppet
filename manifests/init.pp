@@ -9,5 +9,4 @@
 
 class thycotic_secrets(
   Boolean $metadata = false,
-  String $storage_name = 'test-secret.txt',
 ) {}

@@ -16,9 +16,6 @@ on_supported_os.each do |os, os_facts|
 
       it { is_expected.to compile }
 
-      it do
-        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
-      end
     end
   end
 
@@ -37,9 +34,6 @@ on_supported_os.each do |os, os_facts|
 
       it { is_expected.to compile }
 
-      it do
-        is_expected.to contain_file('/tmp/test-secret.txt').with_content(%r{password})
-      end
     end
   end
 end

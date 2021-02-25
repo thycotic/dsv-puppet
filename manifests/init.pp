@@ -7,6 +7,6 @@
 # @param storage_name
 #   Specifies the filename where the file will be installed (inside /tmp)
 
-class thycotic_secrets(
+class thycotic_dsv(
   Boolean $metadata = false,
 ) {}

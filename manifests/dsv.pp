@@ -14,7 +14,7 @@
 #    the path of the required secret
 #
 
-class thycotic_secrets::dsv(
+class thycotic_dsv::dsv(
     String $client_id,
     String $client_secret,
     String $tenant,
@@ -25,5 +25,5 @@ class thycotic_secrets::dsv(
     provider => 'puppet_gem',
   }
 
-  $secret = dsv_secret($client_id, $client_secret, $tenant, $secret_path, $thycotic_secrets::metadata)
+  $secret = dsv_secret($client_id, $client_secret, $tenant, $secret_path, $thycotic_dsv::metadata)
 }

@@ -1,8 +1,8 @@
-# Thycotic Secrets
+# DevOps Secret Vault
 
 ## Table of Contents
 
-- [Thycotic Secrets](#thycotic-secrets)
+- [DevOps Secret Vault](#devops-secret-vault)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Setup](#setup)
@@ -10,25 +10,21 @@
     - [Installation](#installation)
   - [Usage](#usage)
     - [DSV configuration](#dsv-configuration)
-    - [TSS Configuration](#tss-configuration)
   - [Limitations](#limitations)
 
 ## Description
 
-This Puppet module facilitates the consumption of secrets from Thycotic Secret Server(TSS) and DevOps Secret Vault(DSV). 
+This Puppet module facilitates the consumption of secrets from DevOps Secret Vault(DSV).
 
 ## Setup
 
 ### Requirements
 
-In order to use either Secret Server or DevOps Secret Vault, you must first ensure that the corresponding Ruby SDK is available via the puppetserver gem installer.
+In order to use DevOps Secret Vault, you must first ensure that the corresponding Ruby SDK is available via the puppetserver gem installer.
 
 ```
 # Install DevOps Secret Vault SDK
 puppetserver gem install dsv-sdk
-
-# Install Secret Server SDK
-puppetserver gem install tss-sdk
 ```
 
 You must also use a supported OS. See [limitations](#limitations) for a list of supported operating systems.
@@ -39,19 +35,18 @@ This module can be cloned directly into your `modules/` folder for your environm
 
 ## Usage
 
-There are three classes that can be instantiated in your `manifest` file. Instantiate the appropriate class (or both) depending on which of the Thycotic services you depend on (DSV/TSS).
+There are two classes that can be instantiated in your `manifest` file. Instantiate the appropriate class depending on which of the Thycotic services you depend on.
 
-- `class { 'thycotic_secrets': }` (_not required_)
-- `class { 'thycotic_secrets::dsv': }`
-- `class { 'thycotic_secrets::tss': }`
+- `class { 'thycotic_dsv': }` (_not required_)
+- `class { 'thycotic_dsv::dsv': }`
 
-The `thycotic_secrets` base class is _**optional**_ in all cases. If you would like to return the secrets metadata in addition to the secret itself, you can set the `thycotic_secrets::metadata` property to `true`. The default is `false`.
+The `thycotic_dsv` base class is _**optional**_ in all cases. If you would like to return the secrets metadata in addition to the secret itself, you can set the `thycotic_dsv::metadata` property to `true`. The default is `false`.
 
 > It is **recommended** that you use **Hiera** for configuration.
 
-### DSV configuration 
+### DSV configuration
 
-`thycotic_secrets::dsv` requires the following properties to be set:
+`thycotic_dsv::dsv` requires the following properties to be set:
 
 - `client_id` — The client's identifier for authentication
 - `client_secret` — The client's secret for authentication
@@ -63,30 +58,10 @@ An example:
 ```
 # Example config in common.yaml
 
-thycotic_secrets::dsv::client_id: hasdfaw-asefasf-asefs-asefa-asf
-thycotic_secrets::dsv::client_secret: supersecretpassword
-thycotic_secrets::dsv::tenant: abc
-thycotic_secrets::dsv::secret_path: /test/path
-```
-
-### TSS Configuration
-
-`thycotic_secrets::tss` requires the following properties to be set:
-
-- `username` — The client's username for authentication
-- `password` — The client's password for authentication
-- `server_url` — The full qualified server URL
-- `secret_id` — The id of the required secret.
-
-An example:
-
-```
-# Example config in common.yaml
-
-thycotic_secrets::tss::username: definitelynotroot
-thycotic_secrets::tss::password: notrooteither
-thycotic_secrets::tss::server_url: https://mysecretserver.org
-thycotic_secrets::tss::secret_id: 1
+thycotic_dsv::dsv::client_id: hasdfaw-asefasf-asefs-asefa-asf
+thycotic_dsv::dsv::client_secret: supersecretpassword
+thycotic_dsv::dsv::tenant: abc
+thycotic_dsv::dsv::secret_path: /test/path
 ```
 
 ## Limitations

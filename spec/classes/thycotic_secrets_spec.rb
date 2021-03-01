@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 on_supported_os.each do |os, os_facts|
-  describe 'thycotic_dsv::dsv' do
+  describe 'dsv' do
     context "for DSV on #{os}" do
       let(:facts) { os_facts }
-      let(:pre_condition) { 'include thycotic_dsv' }
       let(:params) do
         {
           client_id: ENV['CLIENT_ID'],

@@ -31,22 +31,23 @@ You must also use a supported OS. See [limitations](#limitations) for a list of 
 
 ### Installation
 
-This module can be cloned directly into your `modules/` folder for your environment. You can validate this by running `puppet module list` to ensure Puppet recognizes it as a valid module.
+This module can be cloned directly into your `modules/` folder for your environment and rename the folder to `dsv` so that puppets is able to compile the catalog and find the dsv Resource. You can validate this by running `puppet module list` to ensure Puppet recognizes it as a valid module.
 
 ## Usage
 
-There are two classes that can be instantiated in your `manifest` file. Instantiate the appropriate class depending on which of the Thycotic services you depend on.
+Your DSV secret can be made available by initiating a single class:
 
-- `class { 'thycotic_dsv': }` (_not required_)
-- `class { 'thycotic_dsv::dsv': }`
+```
+class { 'dsv': }
+```
 
-The `thycotic_dsv` base class is _**optional**_ in all cases. If you would like to return the secrets metadata in addition to the secret itself, you can set the `thycotic_dsv::metadata` property to `true`. The default is `false`.
+If you would like to return the secrets metadata in addition to the secret itself, you can set the `dsv::metadata` property to `true`. The default is `false`.
 
 > It is **recommended** that you use **Hiera** for configuration.
 
 ### DSV configuration
 
-`thycotic_dsv::dsv` requires the following properties to be set:
+`dsv` requires the following properties to be set:
 
 - `client_id` — The client's identifier for authentication
 - `client_secret` — The client's secret for authentication
@@ -57,11 +58,10 @@ An example:
 
 ```
 # Example config in common.yaml
-
-thycotic_dsv::dsv::client_id: hasdfaw-asefasf-asefs-asefa-asf
-thycotic_dsv::dsv::client_secret: supersecretpassword
-thycotic_dsv::dsv::tenant: abc
-thycotic_dsv::dsv::secret_path: /test/path
+dsv::client_id: hasdfaw-asefasf-asefs-asefa-asf
+dsv::client_secret: supersecretpassword
+dsv::tenant: abc
+dsv::secret_path: /test/path
 ```
 
 ## Limitations

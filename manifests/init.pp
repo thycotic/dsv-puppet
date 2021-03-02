@@ -17,11 +17,11 @@
 #    the path of the required secret
 
 class dsv(
-  Boolean $metadata = false,
   String $client_id,
   String $client_secret,
   String $tenant,
   String $secret_path,
+  Boolean $metadata = false,
 ){
   package { 'dsv-sdk':
     ensure   => 'installed',

@@ -43,6 +43,8 @@ class { 'dsv': }
 
 If you would like to return the secrets metadata in addition to the secret itself, you can set the `dsv::metadata` property to `true`. The default is `false`.
 
+You can access your returned secret with the `dsv::secret` property.
+
 > It is **recommended** that you use **Hiera** for configuration.
 
 ### DSV configuration

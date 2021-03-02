@@ -31,7 +31,7 @@ You must also use a supported OS. See [limitations](#limitations) for a list of 
 
 ### Installation
 
-This module can be cloned directly into your `modules/` folder for your environment and rename the folder to `dsv` so that puppets is able to compile the catalog and find the dsv Resource. You can validate this by running `puppet module list` to ensure Puppet recognizes it as a valid module.
+This module can be cloned directly into your `modules/` folder for your environment and rename the folder to `dsv/` so that puppets is able to compile the catalog and find the `dsv` resource. You can validate this by running `puppet module list` to ensure Puppet recognizes it as a valid module.
 
 ## Usage
 
